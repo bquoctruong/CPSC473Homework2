@@ -7,31 +7,31 @@ var RIGHTCLICK_LINK_SELECTOR = "[data-image-role=\"trigger2\"]";
 var current = 2;
 //2/24 UPDATE: GET PREVIOUS CLICK TO WORK
 
-function setDetails(imageUrl, titleText){
+function setDetails(imageUrl, titleText) {
   "use strict";
   var detailImage = document.querySelector(DETAIL_IMAGE_SELECTOR);
   detailImage.setAttribute("src", imageUrl);
 
-  var detailTitle=document.querySelector(DETAIL_TITLE_SELECTOR);
+  var detailTitle = document.querySelector(DETAIL_TITLE_SELECTOR);
   detailTitle.textContent = titleText;
 }
 
-function imageFromThumb(thumbnail){
+function imageFromThumb(thumbnail) {
   "use strict";
   return thumbnail.getAttribute("data-image-url");
 }
 
-function titleFromThumb(thumbnail){
+function titleFromThumb(thumbnail) {
   "use strict";
   return thumbnail.getAttribute("data-image-title");
 }
 
-function setDetailsFromThumb(thumbnail){
+function setDetailsFromThumb(thumbnail) {
   "use strict";
   setDetails(imageFromThumb(thumbnail), titleFromThumb(thumbnail));
 }
 
-function addThumbClickHandler(thumb){
+function addThumbClickHandler(thumb) {
   "use strict";
   thumb.addEventListener("click", function(event) {
     event.preventDefault();
@@ -40,7 +40,7 @@ function addThumbClickHandler(thumb){
 }
 
 
-function getThumbnailsArray(){
+function getThumbnailsArray() {
   "use strict";
   var thumbnails = document.querySelectorAll(THUMBNAIL_LINK_SELECTOR);
   var thumbnailArray = [].slice.call(thumbnails);
@@ -48,7 +48,7 @@ function getThumbnailsArray(){
 }
 
 
-function initializeEvents(){
+function initializeEvents() {
   "use strict";
   var thumbnails = getThumbnailsArray();
   //var leftArrow = getPrevArrowArray();
@@ -57,20 +57,18 @@ function initializeEvents(){
   var prev = document.querySelector(LEFTCLICK_LINK_SELECTOR);
   var next = document.querySelector(RIGHTCLICK_LINK_SELECTOR);
 
-  prev.addEventListener("click", function(event){
+  prev.addEventListener("click", function(event) {
     event.preventDefault();
     current -= 1;
-    if (current <= 0)
-    {
+    if (current <= 0) {
       current = 6;
     }
     setDetailsFromThumb(thumbnails[current]);
   });
-  next.addEventListener("click", function(event){
+  next.addEventListener("click", function(event) {
     event.preventDefault();
     current += 1;
-    if (current >= 6)
-    {
+    if (current >= 6) {
       current = 0;
     }
     setDetailsFromThumb(thumbnails[current]);
